@@ -28,12 +28,19 @@ get_timestamp(url)
 [1] "2019-07-15T18:15:36Z"
 
 get_hash(url)
-[1] bb6965c725c20f3c90df2ad1b8bf71b1544bc0bbe78cc86801940a9f3fa59e90
+[1] "744e41f7d7e1f05bd29229a944ee598b94d593aec4c012e50bdeb63a1cd0b6b7"
 ```
 
 The package makes use of a free service, provided by https://stellarapi.io. This service makes it possible to make transactions and get information of previous transactions. In case you want to get the transaction on the Stellar network, you can use:
 
 ```
 get_url_blockchaintransaction(url)
-[1] https://stellarchain.io/tx/d288f39a5fa202275c57688aa92642f7cdfa619fdc987d9fa1bf994e88b3e63a
+[1] "https://stellarchain.io/tx/d288f39a5fa202275c57688aa92642f7cdfa619fdc987d9fa1bf994e88b3e63a"
+```
+
+The provided url shows all information of the transaction on the Stellar network. This serves as a secure proof of the exact time at which that data existed. Be aware: Stellar stores hashes in binairy format and presents them base64 encoded. Use the following code to convert the 64encoded hash to regular hexadecimal form:
+
+```
+convert_stellarHash("u2llxyXCDzyQ3yrRuL9xsVRLwLvnjMhoAZQKnz+lnpA=")
+[1] "bb6965c725c20f3c90df2ad1b8bf71b1544bc0bbe78cc86801940a9f3fa59e90"
 ```
