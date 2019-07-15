@@ -1,4 +1,4 @@
-# tts - trusted timestamping
+Trusted Timestamping
 R package for creating Trusted Timestamps.
-Generated hashes of objects or files will be put in a blockchain transaction (on the STELLAR network).
-Stellar transactions are executed through service available at stellarapi.io (https://stellarapi.io).
+
+Trusted Timestamps (tts) are created by submitting a sha256 hash of a file or dataset into a transaction on the decentralized blockchain (Stellar network). The package makes use of a free service provided by https://stellarapi.io.
