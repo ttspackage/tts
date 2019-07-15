@@ -10,11 +10,23 @@ The package makes use of the Stellar network and of a free service provided by h
 Using this package is simple:
 
 ```
-x <- 2
+x <- 1
 
 # create tts of object/dataset
 url <- create_ttsObject(x)
 validate_hashObject(url, x)
 
-# remember to store the url!
+x <-2
+validate_hashObject(url, x)
+```
+
+## 'Helper functions'
+The package includes some helper functions: 
+
+```
+get_timestamp(url)
+[1] "2019-07-15T18:15:36Z"
+
+get_url_blockchaintransaction(url)
+[1] https://stellarchain.io/tx/d288f39a5fa202275c57688aa92642f7cdfa619fdc987d9fa1bf994e88b3e63a
 ```
