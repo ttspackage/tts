@@ -16,7 +16,8 @@ x <- 1
 url <- create_ttsObject(x)
 
 # Compare the hash on the Stellar network with the hash generated 'on the fly'
-# Take note: conformation proces on Stellar takes 6 seconds. If you validate when the transaction is not confirmed, 
+# Take note: conformation proces on Stellar network takes 6 seconds. 
+# If you validate a hash when the transaction is not confirmed, 
 # the result will be 'not correct'
 validate_hashObject(url, x)
 
