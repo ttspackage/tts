@@ -13,12 +13,16 @@ Using this package is simple:
 x <- 1
 
 # create tts of object/dataset, it takes about 6 seconds to make a transaction
+
 url <- create_ttsObject(x)
 
-# Compare the hash on the Stellar network with the hash generated 'on the fly'
-# Take note: conformation proces on Stellar network takes 6 seconds. 
-# If you validate a hash when the transaction is not confirmed, 
-# the result will be 'not correct'
+# store url in your code (or somewhere else)
+url
+[1] "https://stellarapi.io/gethash/076a3c8879d6cbb84f4f2906a41464eb60ce515f17183418fddfa502cfd5dceb"
+
+# Compare the hash on the Stellar network with the hash generated 'on the fly' 
+# (p.s. wait 6 seconds after creation of tts (time needed for confirming all transaction on ledger))
+
 validate_hashObject(url, x)
 [1] "correct"
 
@@ -26,8 +30,8 @@ x <-2
 validate_hashObject(url, x)
 [1] "not correct"
 ```
-
-Remember to store the provided url for later use! 
+Take note: conformation proces on Stellar network takes 6 seconds. If you validate a hash when the transaction is not confirmed, 
+the result will be 'not correct'. And remember to store the provided url for later use! 
 
 ## 'Helper functions'
 The package includes some helper functions: 
