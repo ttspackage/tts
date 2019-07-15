@@ -12,13 +12,19 @@ Using this package is simple:
 ```
 x <- 1
 
-# create tts of object/dataset
+# create tts of object/dataset, it takes about 6 seconds to make a transaction
 url <- create_ttsObject(x)
+
+# Compare the hash on the Stellar network with the hash generated 'on the fly'
+# Take note: conformation proces on Stellar takes 6 seconds. If you validate when the transaction is not confirmed, 
+# the result will be 'not correct'
 validate_hashObject(url, x)
 
 x <-2
 validate_hashObject(url, x)
 ```
+
+Remember to store the provided url for later use! 
 
 ## 'Helper functions'
 The package includes some helper functions: 
@@ -41,6 +47,6 @@ get_url_blockchaintransaction(url)
 The provided url shows all information of the transaction on the Stellar network. This serves as a secure proof of the exact time at which that data existed. Be aware: Stellar stores hashes in binairy format and presents them base64 encoded. Use the following code to convert the 64encoded hash to regular hexadecimal form:
 
 ```
-convert_stellarHash("u2llxyXCDzyQ3yrRuL9xsVRLwLvnjMhoAZQKnz+lnpA=")
-[1] "bb6965c725c20f3c90df2ad1b8bf71b1544bc0bbe78cc86801940a9f3fa59e90"
+convert_stellarHash("dE5B99fh8FvSkimpRO5Zi5TVk67EwBLlC962OhzQtrc=")
+[1] "744e41f7d7e1f05bd29229a944ee598b94d593aec4c012e50bdeb63a1cd0b6b7"
 ```
