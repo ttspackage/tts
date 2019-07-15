@@ -20,9 +20,11 @@ url <- create_ttsObject(x)
 # If you validate a hash when the transaction is not confirmed, 
 # the result will be 'not correct'
 validate_hashObject(url, x)
+[1] "correct"
 
 x <-2
 validate_hashObject(url, x)
+[1] "not correct"
 ```
 
 Remember to store the provided url for later use! 
