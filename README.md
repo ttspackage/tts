@@ -27,6 +27,13 @@ The package includes some helper functions:
 get_timestamp(url)
 [1] "2019-07-15T18:15:36Z"
 
+get_hash(url)
+[1] bb6965c725c20f3c90df2ad1b8bf71b1544bc0bbe78cc86801940a9f3fa59e90
+```
+
+The package makes use of a free service, provided by https://stellarapi.io. This service makes it possible to make transactions and get information of previous transactions. In case you want to get the transaction on the Stellar network, you can use:
+
+```
 get_url_blockchaintransaction(url)
 [1] https://stellarchain.io/tx/d288f39a5fa202275c57688aa92642f7cdfa619fdc987d9fa1bf994e88b3e63a
 ```
