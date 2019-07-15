@@ -1,25 +1,25 @@
-#  tts - R package for creating Trusted Timestamps (tts)
-#  Generated hashes of objects or files will be put in a blockchain transaction (on the STELLAR network)
-#  Stellar transactions are executed through service available at stellarapi.io.
+#  trustedtimestamping - R package for creating Trusted Timestamps (tts)
+#  Trusted Timestamps (tts) are created by submitting a sha256 hash of the file or dataset into a transaction on the decentralized blockchain (Stellar network).
+#  The package makes use of a free service provided by https://stellarapi.io.
 #
 #  Copyright (C) 2019-present, Peter A. Muller
 #
-#  This file is part of the tts R package.
+#  This file is part of the trustedtimestamping R package.
 #
-#  The tts R package is free software: you can redistribute it and/or modify it
+#  The trustedtimestamping R package is free software: you can redistribute it and/or modify it
 #  under the terms of the GNU Affero General Public License version 3 as
 #  published by the Free Software Foundation.
 #
-#  The tts R package is distributed in the hope that it will be useful, but
+#  The trustedtimestamping R package is distributed in the hope that it will be useful, but
 #  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
 #  FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
 #  for more details.
 #
 #  You should have received a copy of the GNU Affero General Public License along
-#  with the tts R package. If not, see <http://www.gnu.org/licenses/>.
+#  with the trustedtimestamping R package. If not, see <http://www.gnu.org/licenses/>.
 #
 #  You can contact the author at:
-#  - fst R package source repository : https://github.com/ttspackage/tts
+#  - trustedtimestamping R package source repository : https://github.com/ttspackage/tts
 
 
 
@@ -37,7 +37,7 @@ digest::digest
 jsonlite::fromJSON
 
 
-#' create trusted timestamp of an object
+#' Create trusted timestamp of an object/dataset
 #'
 #' @param data any dataset or object
 #'
@@ -45,8 +45,8 @@ jsonlite::fromJSON
 #' @export
 #'
 #' @examples
-#' create.tts.object(data)
-create.tts.object <- function(data) {
+#' create_ttsObject(data)
+create_ttsObject <- function(data) {
 
   hash <- digest(data, algo=c("sha256"))
 
@@ -64,25 +64,25 @@ create.tts.object <- function(data) {
 
 }
 
-#' create trusted timestamp of a file
+#' Create trusted timestamp of a file
 #'
-#' @param data filename (and path, if outside working directory) of a file
+#' @param path filename (and path, if outside working directory)
 #'
 #' @return url
 #' @export
 #'
 #' @examples
-#' create.tts.file("test.rds")
-create.tts.file <- function(data) {
+#' create_ttsFile("test.rds")
+create_ttsFile <- function(path) {
 
-  if (!is.character(data)) stop("Please specify a correct path.")
+  if (!is.character(path)) stop("Please specify a correct path.")
 
-  if (!file.exists(data)) {
-    print(c('File: ',data,' not found.'))
+  if (!file.exists(path)) {
+    print(c('File: ',path,' not found.'))
   }
   else {
 
-    hash <- digest(data, algo="sha256", file=TRUE)
+    hash <- digest(path, algo="sha256", file=TRUE)
 
     url  <- paste("https://stellarapi.io/storehash/", hash)
     url  <- gsub(" ", "", url, fixed = TRUE)
@@ -96,10 +96,9 @@ create.tts.file <- function(data) {
 
     return(url)
   }
-  
 }
 
-#' create hash of an object
+#' Create hash of an object/dataset
 #'
 #' @param data any dataset or object
 #'
@@ -107,8 +106,8 @@ create.tts.file <- function(data) {
 #' @export
 #'
 #' @examples
-#' create.hash.object(data)
-create.hash.object <- function(data) {
+#' create_hashObject(data)
+create_hashObject <- function(data) {
 
   hash <- digest(data, algo=c("sha256"))
   return(hash)
@@ -116,32 +115,32 @@ create.hash.object <- function(data) {
 }
 
 
-#' create hash of a file
+#' Create hash of a file
 #'
-#' @param data filename (and path, if outside working directory) of a file
+#' @param path filename (and path, if outside working directory) of a file
 #'
 #' @return hash
 #' @export
 #'
 #' @examples
-#' create.hash.file("test.rds")
-create.hash.file <- function(data) {
+#' create_hashFile("test.rds")
+create_hashFile <- function(path) {
 
-  if (!is.character(data)) stop("Please specify a correct path.")
+  if (!is.character(path)) stop("Please specify a correct path.")
 
-  if (!file.exists(data)) {
-    print(c('File: ',data,' not found.'))
+  if (!file.exists(path)) {
+    print(c('File: ',path,' not found.'))
   }
   else {
 
-    hash <- digest(data, algo="sha256", file=TRUE)
+    hash <- digest(path, algo="sha256", file=TRUE)
     return(hash)
   }
 
 }
 
 
-#' retrieve hash from STELLAR network
+#' Retrieve hash from STELLAR network
 #'
 #' @param url url
 #'
@@ -149,8 +148,8 @@ create.hash.file <- function(data) {
 #' @export
 #'
 #' @examples
-#' get.hash("https://stellarapi.io/gethash/ea0ae0")
-get.hash <- function(url) {
+#' get_hash("https://stellarapi.io/gethash/ea0ae0")
+get_hash <- function(url) {
 
   req  <- GET(url)
   json <- content(req, "text")
@@ -160,7 +159,7 @@ get.hash <- function(url) {
 
 }
 
-#' retrieve timestamp from STELLAR network
+#' Retrieve timestamp from STELLAR network
 #'
 #' @param url url
 #'
@@ -168,8 +167,8 @@ get.hash <- function(url) {
 #' @export
 #'
 #' @examples
-#' get.timestamp("https://stellarapi.io/gethash/ea0ae0")
-get.timestamp <- function(url) {
+#' get_timestamp("https://stellarapi.io/gethash/ea0ae0")
+get_timestamp <- function(url) {
 
   req  <- GET(url)
   json <- content(req, "text")
@@ -179,16 +178,16 @@ get.timestamp <- function(url) {
 
 }
 
-#' retrieve url to blockchain transaction on STELLAR network
+#' Retrieve url of the transaction on STELLAR network
 #'
 #' @param url url
 #'
-#' @return url url to blockchain transaction
+#' @return url url of blockchain transaction
 #' @export
 #'
 #' @examples
-#' get.url.blockchaintransaction("https://stellarapi.io/gethash/ea0ae0")
-get.url.blockchaintransaction <- function(url) {
+#' get_url_blockchaintransaction("https://stellarapi.io/gethash/ea0ae0")
+get_url_blockchaintransaction <- function(url) {
 
   req  <- GET(url)
   json <- content(req, "text")
@@ -199,17 +198,17 @@ get.url.blockchaintransaction <- function(url) {
 }
 
 
-#' validate hash of an object (created on the fly) with hash in transaction on STELLAR network
+#' Validate hash of object/dataset (created on the fly) with hash on STELLAR network
 #'
 #' @param url url
-#' @param data any data/object
+#' @param data any dataset or object
 #'
 #' @return res result of validation
 #' @export
 #'
 #' @examples
-#' validate.objecthash("https://stellarapi.io/gethash/ea0ae0", data)
-validate.objecthash <- function(url, data) {
+#' validate_hashObject("https://stellarapi.io/gethash/ea0ae0", data)
+validate_hashObject <- function(url, data) {
 
   req          <- GET(url)
   json         <- content(req, "text")
@@ -228,29 +227,29 @@ validate.objecthash <- function(url, data) {
 }
 
 
-#' validate hash of a file (created on the fly) with hash in transaction on STELLAR network
+#' Validate hash of a file (created on the fly) with hash on STELLAR network
 #'
 #' @param url url
-#' @param data filename (and path, if outside working directory) of a file
+#' @param path filename (and path, if outside working directory)
 #'
 #' @return res result of validation
 #' @export
 #'
 #' @examples
-#' validate.filehash("https://stellarapi.io/gethash/ea0ae0", "test.rds")
-validate.filehash <- function(url, data) {
+#' validate_hashFile("https://stellarapi.io/gethash/ea0ae0", "test.rds")
+validate_hashFile <- function(url, path) {
 
-  if (!is.character(data)) stop("Please specify a correct path.")
+  if (!is.character(path)) stop("Please specify a correct path.")
 
-  if (!file.exists(data)) {
-    print(c('File: ',data,' not found.'))
+  if (!file.exists(path)) {
+    print(c('File: ',path,' not found.'))
   }
   else {
 
     req          <- GET(url)
     json         <- content(req, "text")
     res          <- fromJSON(json)
-    hashonthefly <- digest(data, algo="sha256", file=TRUE)
+    hashonthefly <- digest(path, algo="sha256", file=TRUE)
     hash         <- res['memo-hexformat']
 
     if(hashonthefly == hash){
@@ -267,7 +266,7 @@ validate.filehash <- function(url, data) {
 
 
 
-#' convert hash as presented on STELLAR network (base64 encoded) to standard hexadecimal value
+#' Convert hash on STELLAR network (base64 encoded) to standard hexadecimal value
 #'
 #' @param data base64 encoded hash
 #'
@@ -275,8 +274,8 @@ validate.filehash <- function(url, data) {
 #' @export
 #'
 #' @examples
-#' convert.stellarhash("KMVvhSYRAquk3lPpzljU4SytQSawsTz1aeB+PoKFaf0=")
-convert.stellarhash <- function(data) {
+#' convert_stellarHash("KMVvhSYRAquk3lPpzljU4SytQSawsTz1aeB+PoKFaf0=")
+convert_stellarHash <- function(data) {
 
   dec <- base64_dec(data)
   hex <- paste( unlist(dec), collapse='')
