@@ -23,10 +23,12 @@
 
 
 
-#' @importFrom httr GET content
+#' @importFrom httr GET content use_proxy verbose
 #' @export
 httr::GET
 httr::content
+httr::use_proxy
+httr::verbose
 
 #' @importFrom digest digest
 #' @export
@@ -40,20 +42,30 @@ jsonlite::fromJSON
 #' Create trusted timestamp of an object/dataset
 #'
 #' @param data any dataset or object
+#' @param proxy_ip if needed, provide proxy ip
+#' @param proxy_port if needed, provide proxy port
 #'
 #' @return url
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' create_ttsObject(data)
-create_ttsObject <- function(data) {
+#' }
+create_ttsObject <- function(data, proxy_ip=NULL, proxy_port=NULL) {
 
   hash <- digest(data, algo=c("sha256"))
 
   url  <- paste("https://stellarapi.io/storehash/", hash)
   url  <- gsub(" ", "", url, fixed = TRUE)
 
-  req  <- GET(url)
+  if (!is.null(proxy_ip)) {
+    req <- GET(url, use_proxy(proxy_ip, proxy_port),verbose(data_out = FALSE, data_in = FALSE, info = FALSE, ssl = FALSE))
+  }
+  else {
+    req <- GET(url)
+  }
+
   json <- content(req, "text")
   res  <- fromJSON(json)
 
@@ -67,13 +79,17 @@ create_ttsObject <- function(data) {
 #' Create trusted timestamp of a file
 #'
 #' @param path filename (and path, if outside working directory)
+#' @param proxy_ip if needed, provide proxy ip
+#' @param proxy_port if needed, provide proxy port
 #'
 #' @return url
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' create_ttsFile("test.rds")
-create_ttsFile <- function(path) {
+#' }
+create_ttsFile <- function(path, proxy_ip=NULL, proxy_port=NULL) {
 
   if (!is.character(path)) stop("Please specify a correct path.")
 
@@ -87,7 +103,13 @@ create_ttsFile <- function(path) {
     url  <- paste("https://stellarapi.io/storehash/", hash)
     url  <- gsub(" ", "", url, fixed = TRUE)
 
-    req  <- GET(url)
+    if (!is.null(proxy_ip)) {
+      req <- GET(url, use_proxy(proxy_ip, proxy_port),verbose(data_out = FALSE, data_in = FALSE, info = FALSE, ssl = FALSE))
+    }
+    else {
+      req <- GET(url)
+    }
+
     json <- content(req, "text")
     res  <- fromJSON(json)
 
@@ -143,15 +165,26 @@ create_hashFile <- function(path) {
 #' Retrieve hash from STELLAR network
 #'
 #' @param url url
+#' @param proxy_ip if needed, provide proxy ip
+#' @param proxy_port if needed, provide proxy port
 #'
 #' @return hash
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_hash("https://stellarapi.io/gethash/ea0ae0")
-get_hash <- function(url) {
+#' }
+get_hash <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 
-  req  <- GET(url)
+
+  if (!is.null(proxy_ip)) {
+    req <- GET(url, use_proxy(proxy_ip, proxy_port),verbose(data_out = FALSE, data_in = FALSE, info = FALSE, ssl = FALSE))
+  }
+  else {
+    req <- GET(url)
+  }
+
   json <- content(req, "text")
   res  <- fromJSON(json)
   hex  <- unlist(res['memo-hexformat'], recursive = F, use.names = F)
@@ -162,15 +195,25 @@ get_hash <- function(url) {
 #' Retrieve timestamp from STELLAR network
 #'
 #' @param url url
+#' @param proxy_ip if needed, provide proxy ip
+#' @param proxy_port if needed, provide proxy port
 #'
 #' @return GMT GMT-timestamp
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_timestamp("https://stellarapi.io/gethash/ea0ae0")
-get_timestamp <- function(url) {
+#' }
+get_timestamp <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 
-  req  <- GET(url)
+  if (!is.null(proxy_ip)) {
+    req <- GET(url, use_proxy(proxy_ip, proxy_port),verbose(data_out = FALSE, data_in = FALSE, info = FALSE, ssl = FALSE))
+  }
+  else {
+    req <- GET(url)
+  }
+
   json <- content(req, "text")
   res  <- fromJSON(json)
   GMT  <- unlist(res['GMT-timestamp'], recursive = F, use.names = F)
@@ -181,15 +224,25 @@ get_timestamp <- function(url) {
 #' Retrieve url of the transaction on STELLAR network
 #'
 #' @param url url
+#' @param proxy_ip if needed, provide proxy ip
+#' @param proxy_port if needed, provide proxy port
 #'
 #' @return url url of blockchain transaction
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_url_blockchaintransaction("https://stellarapi.io/gethash/ea0ae0")
-get_url_blockchaintransaction <- function(url) {
+#' }
+get_url_blockchaintransaction <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 
-  req  <- GET(url)
+  if (!is.null(proxy_ip)) {
+    req <- GET(url, use_proxy(proxy_ip, proxy_port),verbose(data_out = FALSE, data_in = FALSE, info = FALSE, ssl = FALSE))
+  }
+  else {
+    req <- GET(url)
+  }
+
   json <- content(req, "text")
   res  <- fromJSON(json)
   url  <-  unlist(res['stellar-link'], recursive = F, use.names = F)
@@ -198,19 +251,29 @@ get_url_blockchaintransaction <- function(url) {
 }
 
 
-#' Validate hash of object/dataset (created on the fly) with hash on STELLAR network
+#' Validate hash of an object/dataset (created on the fly) with hash on STELLAR network
 #'
 #' @param url url
 #' @param data any dataset or object
+#' @param proxy_ip if needed, provide proxy ip
+#' @param proxy_port if needed, provide proxy port
 #'
 #' @return res result of validation
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' validate_hashObject("https://stellarapi.io/gethash/ea0ae0", data)
-validate_hashObject <- function(url, data) {
+#' }
+validate_hashObject <- function(url, data, proxy_ip=NULL, proxy_port=NULL) {
 
-  req          <- GET(url)
+  if (!is.null(proxy_ip)) {
+    req <- GET(url, use_proxy(proxy_ip, proxy_port),verbose(data_out = FALSE, data_in = FALSE, info = FALSE, ssl = FALSE))
+  }
+  else {
+    req <- GET(url)
+  }
+
   json         <- content(req, "text")
   res          <- fromJSON(json)
   hashonthefly <- digest(data, algo=c("sha256"))
@@ -231,13 +294,17 @@ validate_hashObject <- function(url, data) {
 #'
 #' @param url url
 #' @param path filename (and path, if outside working directory)
+#' @param proxy_ip if needed, provide proxy ip
+#' @param proxy_port if needed, provide proxy port
 #'
 #' @return res result of validation
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' validate_hashFile("https://stellarapi.io/gethash/ea0ae0", "test.rds")
-validate_hashFile <- function(url, path) {
+#' }
+validate_hashFile <- function(url, path, proxy_ip=NULL, proxy_port=NULL) {
 
   if (!is.character(path)) stop("Please specify a correct path.")
 
@@ -246,7 +313,13 @@ validate_hashFile <- function(url, path) {
   }
   else {
 
-    req          <- GET(url)
+    if (!is.null(proxy_ip)) {
+      req <- GET(url, use_proxy(proxy_ip, proxy_port),verbose(data_out = FALSE, data_in = FALSE, info = FALSE, ssl = FALSE))
+    }
+    else {
+      req <- GET(url)
+    }
+
     json         <- content(req, "text")
     res          <- fromJSON(json)
     hashonthefly <- digest(path, algo="sha256", file=TRUE)
@@ -274,7 +347,9 @@ validate_hashFile <- function(url, path) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' convert_stellarHash("KMVvhSYRAquk3lPpzljU4SytQSawsTz1aeB+PoKFaf0=")
+#' }
 convert_stellarHash <- function(data) {
 
   dec <- base64_dec(data)
