@@ -46,6 +46,7 @@ url <- create_ttsFile("E:/data.rds")
 
 # remember to wait a couple of seconds before validating a hash!
 validate_hashFile(url, "E:/data.rds")
+[1] "correct"
 ```
 
 ## 'Helper functions'
