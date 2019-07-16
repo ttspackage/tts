@@ -33,6 +33,12 @@ validate_hashObject(url, x)
 Take note: conformation proces on Stellar network takes 6 seconds. If you validate a hash when the transaction is not confirmed, 
 the result will be 'not correct'. And remember to store the provided url for later use! 
 
+When a firewall is blocking cUrl requests, you can use a proxyserver:
+
+```
+url <- create_ttsObject(x, '10.10.10.10', 8080)
+```
+
 ## 'Helper functions'
 The package includes some helper functions: 
 
