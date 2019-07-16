@@ -1,6 +1,10 @@
 ## Submission
 
-This submission of trustedtimestamping (v0.2.2) addresses issues provided by Cran.
+This submission of trustedtimestamping (v0.2.3) addresses issues provided by Cran.
+
+## Reported issues v0.2.2: 
+
+* The Description field contains https://stellarapi.io. Please enclose URLs in angle brackets (<...>).
 
 ## Reported issues v0.2.1: 
 
