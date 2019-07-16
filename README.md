@@ -39,6 +39,15 @@ When a firewall is blocking cUrl requests, you can use a proxyserver:
 url <- create_ttsObject(x, '10.10.10.10', 8080)
 ```
 
+It is also possible to create a trusted timestamp of a file (instead of an object or dataset):
+
+```
+url <- create_ttsFile("E:/data.rds")
+
+# remember to wait a couple of seconds before validating a hash!
+validate_hashFile(url, "E:/data.rds")
+```
+
 ## 'Helper functions'
 The package includes some helper functions: 
 
