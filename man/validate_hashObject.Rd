@@ -4,12 +4,16 @@
 \alias{validate_hashObject}
 \title{Validate hash of object/dataset (created on the fly) with hash on STELLAR network}
 \usage{
-validate_hashObject(url, data)
+validate_hashObject(url, data, proxy_ip = NULL, proxy_port = NULL)
 }
 \arguments{
 \item{url}{url}
 
 \item{data}{any dataset or object}
+
+\item{proxy_ip}{ip if needed, provide proxy ip}
+
+\item{proxy_port}{if needed, provide proxy port}
 }
 \value{
 res result of validation
@@ -18,5 +22,7 @@ res result of validation
 Validate hash of object/dataset (created on the fly) with hash on STELLAR network
 }
 \examples{
+\dontrun{
 validate_hashObject("https://stellarapi.io/gethash/ea0ae0", data)
+}
 }

@@ -4,10 +4,14 @@
 \alias{get_timestamp}
 \title{Retrieve timestamp from STELLAR network}
 \usage{
-get_timestamp(url)
+get_timestamp(url, proxy_ip = NULL, proxy_port = NULL)
 }
 \arguments{
 \item{url}{url}
+
+\item{proxy_ip}{ip if needed, provide proxy ip}
+
+\item{proxy_port}{if needed, provide proxy port}
 }
 \value{
 GMT GMT-timestamp
@@ -16,5 +20,7 @@ GMT GMT-timestamp
 Retrieve timestamp from STELLAR network
 }
 \examples{
+\dontrun{
 get_timestamp("https://stellarapi.io/gethash/ea0ae0")
+}
 }

@@ -4,10 +4,14 @@
 \alias{get_url_blockchaintransaction}
 \title{Retrieve url of the transaction on STELLAR network}
 \usage{
-get_url_blockchaintransaction(url)
+get_url_blockchaintransaction(url, proxy_ip = NULL, proxy_port = NULL)
 }
 \arguments{
 \item{url}{url}
+
+\item{proxy_ip}{ip if needed, provide proxy ip}
+
+\item{proxy_port}{if needed, provide proxy port}
 }
 \value{
 url url of blockchain transaction
@@ -16,5 +20,7 @@ url url of blockchain transaction
 Retrieve url of the transaction on STELLAR network
 }
 \examples{
+\dontrun{
 get_url_blockchaintransaction("https://stellarapi.io/gethash/ea0ae0")
+}
 }

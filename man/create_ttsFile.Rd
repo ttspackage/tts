@@ -4,10 +4,14 @@
 \alias{create_ttsFile}
 \title{Create trusted timestamp of a file}
 \usage{
-create_ttsFile(path)
+create_ttsFile(path, proxy_ip = NULL, proxy_port = NULL)
 }
 \arguments{
 \item{path}{filename (and path, if outside working directory)}
+
+\item{proxy_ip}{ip if needed, provide proxy ip}
+
+\item{proxy_port}{if needed, provide proxy port}
 }
 \value{
 url
@@ -16,5 +20,7 @@ url
 Create trusted timestamp of a file
 }
 \examples{
+\dontrun{
 create_ttsFile("test.rds")
+}
 }

@@ -4,12 +4,16 @@
 \alias{validate_hashFile}
 \title{Validate hash of a file (created on the fly) with hash on STELLAR network}
 \usage{
-validate_hashFile(url, path)
+validate_hashFile(url, path, proxy_ip = NULL, proxy_port = NULL)
 }
 \arguments{
 \item{url}{url}
 
 \item{path}{filename (and path, if outside working directory)}
+
+\item{proxy_ip}{ip if needed, provide proxy ip}
+
+\item{proxy_port}{if needed, provide proxy port}
 }
 \value{
 res result of validation
@@ -18,5 +22,7 @@ res result of validation
 Validate hash of a file (created on the fly) with hash on STELLAR network
 }
 \examples{
+\dontrun{
 validate_hashFile("https://stellarapi.io/gethash/ea0ae0", "test.rds")
+}
 }

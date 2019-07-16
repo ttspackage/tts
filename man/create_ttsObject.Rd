@@ -4,10 +4,14 @@
 \alias{create_ttsObject}
 \title{Create trusted timestamp of an object/dataset}
 \usage{
-create_ttsObject(data)
+create_ttsObject(data, proxy_ip = NULL, proxy_port = NULL)
 }
 \arguments{
 \item{data}{any dataset or object}
+
+\item{proxy_ip}{ip if needed, provide proxy ip}
+
+\item{proxy_port}{if needed, provide proxy port}
 }
 \value{
 url
@@ -16,5 +20,7 @@ url
 Create trusted timestamp of an object/dataset
 }
 \examples{
+\dontrun{
 create_ttsObject(data)
+}
 }

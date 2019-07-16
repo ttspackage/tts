@@ -4,10 +4,14 @@
 \alias{get_hash}
 \title{Retrieve hash from STELLAR network}
 \usage{
-get_hash(url)
+get_hash(url, proxy_ip = NULL, proxy_port = NULL)
 }
 \arguments{
 \item{url}{url}
+
+\item{proxy_ip}{ip if needed, provide proxy ip}
+
+\item{proxy_port}{if needed, provide proxy port}
 }
 \value{
 hash
@@ -16,5 +20,7 @@ hash
 Retrieve hash from STELLAR network
 }
 \examples{
+\dontrun{
 get_hash("https://stellarapi.io/gethash/ea0ae0")
+}
 }
