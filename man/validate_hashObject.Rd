@@ -2,7 +2,7 @@
 % Please edit documentation in R/tts.r
 \name{validate_hashObject}
 \alias{validate_hashObject}
-\title{Validate hash of object/dataset (created on the fly) with hash on STELLAR network}
+\title{Validate hash of an object/dataset (created on the fly) with hash on STELLAR network}
 \usage{
 validate_hashObject(url, data, proxy_ip = NULL, proxy_port = NULL)
 }
@@ -11,7 +11,7 @@ validate_hashObject(url, data, proxy_ip = NULL, proxy_port = NULL)
 
 \item{data}{any dataset or object}
 
-\item{proxy_ip}{ip if needed, provide proxy ip}
+\item{proxy_ip}{if needed, provide proxy ip}
 
 \item{proxy_port}{if needed, provide proxy port}
 }
@@ -19,7 +19,7 @@ validate_hashObject(url, data, proxy_ip = NULL, proxy_port = NULL)
 res result of validation
 }
 \description{
-Validate hash of object/dataset (created on the fly) with hash on STELLAR network
+Validate hash of an object/dataset (created on the fly) with hash on STELLAR network
 }
 \examples{
 \dontrun{

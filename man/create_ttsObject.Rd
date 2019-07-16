@@ -9,7 +9,7 @@ create_ttsObject(data, proxy_ip = NULL, proxy_port = NULL)
 \arguments{
 \item{data}{any dataset or object}
 
-\item{proxy_ip}{ip if needed, provide proxy ip}
+\item{proxy_ip}{if needed, provide proxy ip}
 
 \item{proxy_port}{if needed, provide proxy port}
 }
