@@ -69,7 +69,11 @@ get_url_blockchaintransaction(url)
 
 The provided url shows all information of the transaction on the Stellar network. This serves as a secure proof of the exact time at which that data existed. Be aware: Stellar stores hashes in binairy format and presents them base64 encoded. 
 
+
+
 <img src="stellar_transaction.png" align="left" />
+
+
 
 Use the following code to convert the 64encoded hash to regular hexadecimal form:
 
