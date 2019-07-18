@@ -49,7 +49,7 @@ jsonlite::fromJSON
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' create_ttsObject(data)
 #' }
 create_ttsObject <- function(data, proxy_ip=NULL, proxy_port=NULL) {
@@ -86,7 +86,7 @@ create_ttsObject <- function(data, proxy_ip=NULL, proxy_port=NULL) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' create_ttsFile("test.rds")
 #' }
 create_ttsFile <- function(path, proxy_ip=NULL, proxy_port=NULL) {
@@ -118,7 +118,9 @@ create_ttsFile <- function(path, proxy_ip=NULL, proxy_port=NULL) {
 
     return(url)
   }
+
 }
+
 
 #' Create hash of an object/dataset
 #'
@@ -172,7 +174,7 @@ create_hashFile <- function(path) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' get_hash("https://stellarapi.io/gethash/ea0ae0")
 #' }
 get_hash <- function(url, proxy_ip=NULL, proxy_port=NULL) {
@@ -192,6 +194,7 @@ get_hash <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 
 }
 
+
 #' Retrieve timestamp from STELLAR network
 #'
 #' @param url url
@@ -202,7 +205,7 @@ get_hash <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' get_timestamp("https://stellarapi.io/gethash/ea0ae0")
 #' }
 get_timestamp <- function(url, proxy_ip=NULL, proxy_port=NULL) {
@@ -221,6 +224,7 @@ get_timestamp <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 
 }
 
+
 #' Retrieve url of the transaction on STELLAR network
 #'
 #' @param url url
@@ -231,7 +235,7 @@ get_timestamp <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' get_url_blockchaintransaction("https://stellarapi.io/gethash/ea0ae0")
 #' }
 get_url_blockchaintransaction <- function(url, proxy_ip=NULL, proxy_port=NULL) {
@@ -262,7 +266,7 @@ get_url_blockchaintransaction <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' validate_hashObject("https://stellarapi.io/gethash/ea0ae0", data)
 #' }
 validate_hashObject <- function(url, data, proxy_ip=NULL, proxy_port=NULL) {
@@ -287,6 +291,7 @@ validate_hashObject <- function(url, data, proxy_ip=NULL, proxy_port=NULL) {
   }
 
   return(res)
+
 }
 
 
@@ -301,7 +306,7 @@ validate_hashObject <- function(url, data, proxy_ip=NULL, proxy_port=NULL) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' validate_hashFile("https://stellarapi.io/gethash/ea0ae0", "test.rds")
 #' }
 validate_hashFile <- function(url, path, proxy_ip=NULL, proxy_port=NULL) {
@@ -333,10 +338,9 @@ validate_hashFile <- function(url, path, proxy_ip=NULL, proxy_port=NULL) {
     }
 
     return(res)
-
   }
-}
 
+}
 
 
 #' Convert hash on STELLAR network (base64 encoded) to standard hexadecimal value
@@ -347,7 +351,7 @@ validate_hashFile <- function(url, path, proxy_ip=NULL, proxy_port=NULL) {
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' convert_stellarHash("KMVvhSYRAquk3lPpzljU4SytQSawsTz1aeB+PoKFaf0=")
 #' }
 convert_stellarHash <- function(data) {
