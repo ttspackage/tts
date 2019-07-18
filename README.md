@@ -67,7 +67,7 @@ get_url_blockchaintransaction(url)
 [1] "https://stellarchain.io/tx/d288f39a5fa202275c57688aa92642f7cdfa619fdc987d9fa1bf994e88b3e63a"
 ```
 
-The provided url shows all information of the transaction on the Stellar network. This serves as a secure proof of the exact time at which that data existed. Be aware: Stellar stores hashes in binairy format and presents them base64 encoded. 
+The provided url shows all information of the transaction on the Stellar network. This serves as a secure proof of the exact time at which that data existed. Be aware: **Stellar stores hashes in binairy format and presents them base64 encoded.** 
 
 <br/>
 
