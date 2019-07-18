@@ -22,7 +22,7 @@ res result of validation
 Validate hash of a file (created on the fly) with hash on STELLAR network
 }
 \examples{
-\dontrun{
+\donttest{
 validate_hashFile("https://stellarapi.io/gethash/ea0ae0", "test.rds")
 }
 }

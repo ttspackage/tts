@@ -20,7 +20,7 @@ GMT GMT-timestamp
 Retrieve timestamp from STELLAR network
 }
 \examples{
-\dontrun{
+\donttest{
 get_timestamp("https://stellarapi.io/gethash/ea0ae0")
 }
 }

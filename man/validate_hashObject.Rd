@@ -22,7 +22,7 @@ res result of validation
 Validate hash of an object/dataset (created on the fly) with hash on STELLAR network
 }
 \examples{
-\dontrun{
+\donttest{
 validate_hashObject("https://stellarapi.io/gethash/ea0ae0", data)
 }
 }

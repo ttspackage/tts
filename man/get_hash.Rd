@@ -20,7 +20,7 @@ hash
 Retrieve hash from STELLAR network
 }
 \examples{
-\dontrun{
+\donttest{
 get_hash("https://stellarapi.io/gethash/ea0ae0")
 }
 }

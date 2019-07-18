@@ -20,7 +20,7 @@ url url of blockchain transaction
 Retrieve url of the transaction on STELLAR network
 }
 \examples{
-\dontrun{
+\donttest{
 get_url_blockchaintransaction("https://stellarapi.io/gethash/ea0ae0")
 }
 }

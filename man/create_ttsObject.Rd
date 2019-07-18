@@ -20,7 +20,7 @@ url
 Create trusted timestamp of an object/dataset
 }
 \examples{
-\dontrun{
+\donttest{
 create_ttsObject(data)
 }
 }

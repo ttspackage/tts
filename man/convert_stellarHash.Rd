@@ -16,7 +16,7 @@ hex hexadecimal hash
 Convert hash on STELLAR network (base64 encoded) to standard hexadecimal value
 }
 \examples{
-\dontrun{
+\donttest{
 convert_stellarHash("KMVvhSYRAquk3lPpzljU4SytQSawsTz1aeB+PoKFaf0=")
 }
 }

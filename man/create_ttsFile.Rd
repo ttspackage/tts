@@ -20,7 +20,7 @@ url
 Create trusted timestamp of a file
 }
 \examples{
-\dontrun{
+\donttest{
 create_ttsFile("test.rds")
 }
 }
