@@ -73,7 +73,9 @@ The provided url shows all information of the transaction on the Stellar network
 
 <img src="stellar_transaction.png" align="left" />
 
-<br/><br/>
+
+
+
 
 Use the following code to convert the 64encoded hash to regular hexadecimal form:
 
