@@ -1,6 +1,10 @@
 ## Submission
 
-This submission of trustedtimestamping (v0.2.4) addresses issues provided by Cran.
+This submission of trustedtimestamping (v0.2.5) addresses issues provided by Cran.
+
+## Reported issues v0.2.4: 
+* don't use print()
+* don't use T and F (use TRUE and FALSE)
 
 ## Reported issues v0.2.3: 
 
