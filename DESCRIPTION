@@ -2,7 +2,7 @@ Package: trustedtimestamping
 Title: Create Trusted Timestamps of Datasets and Files
 Description: Trusted Timestamps (tts) are created by incorporating a hash of a file or dataset into a transaction on the decentralized blockchain (Stellar network). 
     The package makes use of a free service provided by <https://stellarapi.io>.
-Version: 0.2.4
+Version: 0.2.5
 Authors@R: 
     person(given = "Peter",
            family = "Muller",
