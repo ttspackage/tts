@@ -16,5 +16,7 @@ hash
 Create hash of a file
 }
 \examples{
+\donttest{
 create_hashFile("test.rds")
+}
 }

@@ -2,7 +2,8 @@
 % Please edit documentation in R/tts.r
 \name{validate_hashObject}
 \alias{validate_hashObject}
-\title{Validate hash of an object/dataset (created on the fly) with hash on STELLAR network}
+\title{Validate hash of an object/dataset (created on the fly) with hash on STELLAR network
+p.s. stellar transactions take between 5-7 seconds. If you validate to soon after creating a timestamp, it will fail...}
 \usage{
 validate_hashObject(url, data, proxy_ip = NULL, proxy_port = NULL)
 }
@@ -20,6 +21,7 @@ res result of validation
 }
 \description{
 Validate hash of an object/dataset (created on the fly) with hash on STELLAR network
+p.s. stellar transactions take between 5-7 seconds. If you validate to soon after creating a timestamp, it will fail...
 }
 \examples{
 \donttest{

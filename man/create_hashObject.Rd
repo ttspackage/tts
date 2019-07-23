@@ -16,5 +16,7 @@ hash
 Create hash of an object/dataset
 }
 \examples{
+\donttest{
 create_hashObject(data)
+}
 }
