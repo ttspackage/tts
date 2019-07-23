@@ -34,7 +34,7 @@ httr::verbose
 #' @export
 digest::digest
 
-#' @importFrom jsonlite fromJSON base64_dec
+#' @importFrom jsonlite fromJSON base64_dec validate
 #' @export
 jsonlite::fromJSON
 
@@ -53,6 +53,10 @@ jsonlite::fromJSON
 #' create_ttsObject(data)
 #' }
 create_ttsObject <- function(data, proxy_ip=NULL, proxy_port=NULL) {
+
+  if (!exists(deparse(substitute(data)))) {
+    stop("object '",deparse(substitute(data)),"' does not exist")
+  }
 
   hash <- digest(data, algo=c("sha256"))
 
@@ -94,7 +98,7 @@ create_ttsFile <- function(path, proxy_ip=NULL, proxy_port=NULL) {
   if (!is.character(path)) stop("Please specify a correct path.")
 
   if (!file.exists(path)) {
-    print(c('File: ',path,' not found.'))
+    stop("File: '",path,"' not found.")
   }
   else {
 
@@ -130,8 +134,14 @@ create_ttsFile <- function(path, proxy_ip=NULL, proxy_port=NULL) {
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' create_hashObject(data)
+#' }
 create_hashObject <- function(data) {
+
+  if (!exists(deparse(substitute(data)))) {
+    stop("object '",deparse(substitute(data)),"' does not exist")
+  }
 
   hash <- digest(data, algo=c("sha256"))
   return(hash)
@@ -147,13 +157,15 @@ create_hashObject <- function(data) {
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' create_hashFile("test.rds")
+#' }
 create_hashFile <- function(path) {
 
   if (!is.character(path)) stop("Please specify a correct path.")
 
   if (!file.exists(path)) {
-    print(c('File: ',path,' not found.'))
+    stop("File: '",path,"' not found.")
   }
   else {
 
@@ -188,8 +200,13 @@ get_hash <- function(url, proxy_ip=NULL, proxy_port=NULL) {
   }
 
   json <- content(req, "text")
+
+  if (validate(json)==FALSE) {
+    stop("stellarapi.io returned an unknown error")
+  }
+
   res  <- fromJSON(json)
-  hex  <- unlist(res['memo-hexformat'], recursive = F, use.names = F)
+  hex  <- unlist(res['memo-hexformat'], recursive = FALSE, use.names = FALSE)
   return(hex)
 
 }
@@ -218,8 +235,13 @@ get_timestamp <- function(url, proxy_ip=NULL, proxy_port=NULL) {
   }
 
   json <- content(req, "text")
+
+  if (validate(json)==FALSE) {
+    stop("stellarapi.io returned an unknown error")
+  }
+
   res  <- fromJSON(json)
-  GMT  <- unlist(res['GMT-timestamp'], recursive = F, use.names = F)
+  GMT  <- unlist(res['GMT-timestamp'], recursive = FALSE, use.names = FALSE)
   return(GMT)
 
 }
@@ -248,14 +270,20 @@ get_url_blockchaintransaction <- function(url, proxy_ip=NULL, proxy_port=NULL) {
   }
 
   json <- content(req, "text")
+
+  if (validate(json)==FALSE) {
+    stop("stellarapi.io returned an unknown error")
+  }
+
   res  <- fromJSON(json)
-  url  <-  unlist(res['stellar-link'], recursive = F, use.names = F)
+  url  <-  unlist(res['stellar-link'], recursive = FALSE, use.names = FALSE)
   return(url)
 
 }
 
 
 #' Validate hash of an object/dataset (created on the fly) with hash on STELLAR network
+#' p.s. stellar transactions take between 5-7 seconds. If you validate to soon after creating a timestamp, it will fail...
 #'
 #' @param url url
 #' @param data any dataset or object
@@ -271,6 +299,10 @@ get_url_blockchaintransaction <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 #' }
 validate_hashObject <- function(url, data, proxy_ip=NULL, proxy_port=NULL) {
 
+  if (!exists(deparse(substitute(data)))) {
+    stop("object '",deparse(substitute(data)),"' does not exist")
+  }
+
   if (!is.null(proxy_ip)) {
     req <- GET(url, use_proxy(proxy_ip, proxy_port),verbose(data_out = FALSE, data_in = FALSE, info = FALSE, ssl = FALSE))
   }
@@ -279,6 +311,11 @@ validate_hashObject <- function(url, data, proxy_ip=NULL, proxy_port=NULL) {
   }
 
   json         <- content(req, "text")
+
+  if (validate(json)==FALSE) {
+    stop("stellarapi.io returned an unknown error")
+  }
+
   res          <- fromJSON(json)
   hashonthefly <- digest(data, algo=c("sha256"))
   hash         <- res['memo-hexformat']
@@ -296,6 +333,7 @@ validate_hashObject <- function(url, data, proxy_ip=NULL, proxy_port=NULL) {
 
 
 #' Validate hash of a file (created on the fly) with hash on STELLAR network
+#' p.s. stellar transactions take between 5-7 seconds. If you validate to soon after creating a timestamp, it will fail...
 #'
 #' @param url url
 #' @param path filename (and path, if outside working directory)
@@ -314,7 +352,7 @@ validate_hashFile <- function(url, path, proxy_ip=NULL, proxy_port=NULL) {
   if (!is.character(path)) stop("Please specify a correct path.")
 
   if (!file.exists(path)) {
-    print(c('File: ',path,' not found.'))
+    stop("File: '",path,"' not found.")
   }
   else {
 
@@ -326,6 +364,11 @@ validate_hashFile <- function(url, path, proxy_ip=NULL, proxy_port=NULL) {
     }
 
     json         <- content(req, "text")
+
+    if (validate(json)==FALSE) {
+      stop("stellarapi.io returned an unknown error")
+    }
+
     res          <- fromJSON(json)
     hashonthefly <- digest(path, algo="sha256", file=TRUE)
     hash         <- res['memo-hexformat']
