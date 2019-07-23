@@ -30,8 +30,8 @@ x <-2
 validate_hashObject(url, x)
 [1] "not correct"
 ```
-Take note: conformation proces on Stellar network takes 6 seconds. *If you validate a hash when the transaction is not confirmed, 
-the result will be 'not correct'.* And remember to store the provided url for later use! 
+Take note: conformation proces on Stellar network takes 6 seconds. **If you validate a hash when the transaction is not confirmed, 
+the result will be 'not correct'.** And remember to store the provided url for later use! 
 
 When a firewall is blocking cUrl requests, you can use a proxyserver:
 
