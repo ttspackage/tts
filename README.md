@@ -87,7 +87,7 @@ convert_stellarHash("dE5B99fh8FvSkimpRO5Zi5TVk67EwBLlC962OhzQtrc=")
 ```
 
 ## About stellarapi.io
-Stellarapi.io provides a free service and is a non-commercial research project. Use this service at your own risk. Availability is not guaranteed. The purpose of stellarapi.io is to provide an easy to use interface to Stellar's network. The original blockchain transaction can allways be viewed by subsituting stellapi/gethash with stellarchain/tx:
+Stellarapi.io provides a free service and is a non-commercial research project. Use this service at your own risk. Availability is not guaranteed. The purpose of stellarapi.io is to provide an easy to use interface to Stellar's network. The original blockchain transaction can allways be viewed by substituting stellapi/gethash with stellarchain/tx:
 
 ```
 https://stellarapi.io/gethash/076a3c8879d6cbb84f4f2906a41464eb60ce515f17183418fddfa502cfd5dceb
