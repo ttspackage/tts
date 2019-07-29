@@ -1,3 +1,5 @@
+[![](https://cranlogs.r-pkg.org/badges/trustedtimestamping)](https://cran.r-project.org/package=trustedtimestamping)
+
 ## Trusted Timestamping
 R package for creating Trusted Timestamps.
 
