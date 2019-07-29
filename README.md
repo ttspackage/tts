@@ -66,7 +66,7 @@ The package makes use of a free service, provided by https://stellarapi.io. This
 
 ```
 get_url_blockchaintransaction(url)
-[1] "https://stellarchain.io/tx/d288f39a5fa202275c57688aa92642f7cdfa619fdc987d9fa1bf994e88b3e63a"
+[1] "https://stellarchain.io/tx/076a3c8879d6cbb84f4f2906a41464eb60ce515f17183418fddfa502cfd5dceb"
 ```
 
 The provided url shows all information of the transaction on the Stellar network. This serves as a secure proof of the exact time at which that data existed. Be aware: **Stellar stores hashes in binairy format and presents them base64 encoded.** 
@@ -85,3 +85,13 @@ Use the following code to convert the 64encoded hash to regular hexadecimal form
 convert_stellarHash("dE5B99fh8FvSkimpRO5Zi5TVk67EwBLlC962OhzQtrc=")
 [1] "744e41f7d7e1f05bd29229a944ee598b94d593aec4c012e50bdeb63a1cd0b6b7"
 ```
+
+## About stellarapi.io
+Stellarapi.io provides a free service, and is a non-commercial research project. Use this service at your own risk. Availability is not guaranteed. The purpose of this project is to provide an easy to use interface to Stellar's network. The original blockchain transaction can be viewed by subsituting 'https://stellarapi.io/gethash/' with 'https://stellarchain.io/tx/'.
+
+```
+https://stellarapi.io/gethash/076a3c8879d6cbb84f4f2906a41464eb60ce515f17183418fddfa502cfd5dceb
+https://stellarchain.io/tx/076a3c8879d6cbb84f4f2906a41464eb60ce515f17183418fddfa502cfd5dceb
+
+```
+
