@@ -79,7 +79,7 @@ The provided url shows all information of the transaction on the Stellar network
 
 
 
-Use the following code to convert the 64encoded hash to regular hexadecimal form:
+Use the following code to convert the base64encoded hash to regular hexadecimal form:
 
 ```
 convert_stellarHash("dE5B99fh8FvSkimpRO5Zi5TVk67EwBLlC962OhzQtrc=")
@@ -87,11 +87,11 @@ convert_stellarHash("dE5B99fh8FvSkimpRO5Zi5TVk67EwBLlC962OhzQtrc=")
 ```
 
 ## About stellarapi.io
-Stellarapi.io provides a free service, and is a non-commercial research project. Use this service at your own risk. Availability is not guaranteed. The purpose of this project is to provide an easy to use interface to Stellar's network. The original blockchain transaction can be viewed by subsituting 'https://stellarapi.io/gethash/' with 'https://stellarchain.io/tx/'.
+Stellarapi.io provides a free service and is a non-commercial research project. Use this service at your own risk. Availability is not guaranteed. The purpose of stellarapi.io is to provide an easy to use interface to Stellar's network. The original blockchain transaction can allways be viewed by subsituting stellapi/gethash with stellarchain/tx:
 
 ```
 https://stellarapi.io/gethash/076a3c8879d6cbb84f4f2906a41464eb60ce515f17183418fddfa502cfd5dceb
 https://stellarchain.io/tx/076a3c8879d6cbb84f4f2906a41464eb60ce515f17183418fddfa502cfd5dceb
 
 ```
-
+As stated above, you can convert the base64encoded hash to regular hexadecimal form with convert_stellarHash("bases64encodedhash").
