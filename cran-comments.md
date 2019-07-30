@@ -1,6 +1,11 @@
 ## Submission
 
-This submission of trustedtimestamping (v0.2.5) addresses issues provided by Cran.
+This submission of trustedtimestamping (v0.2.6) provides two improvements:
+* better error-handling
+* Validation is done directly on horizon.stellar.org (to become less dependent on stellarapi.io)
+
+## Reported issues v0.2.5: 
+* none (CRAN accepted)
 
 ## Reported issues v0.2.4: 
 * don't use print()
