@@ -73,8 +73,14 @@ create_ttsObject <- function(data, proxy_ip=NULL, proxy_port=NULL) {
   json <- content(req, "text")
   res  <- fromJSON(json)
 
-  url  <- paste("https://stellarapi.io/gethash/",res['transactionid'])
-  url  <- gsub(" ", "", url, fixed = TRUE)
+  if (res['code'] == 200) {
+
+    url  <- paste("https://horizon.stellar.org/transactions/",res['transactionid'])
+    url  <- gsub(" ", "", url, fixed = TRUE)
+  }
+  else {
+    stop("Something went wrong. Errormessage: ",res['message'])
+  }
 
   return(url)
 
@@ -117,16 +123,21 @@ create_ttsFile <- function(path, proxy_ip=NULL, proxy_port=NULL) {
     json <- content(req, "text")
     res  <- fromJSON(json)
 
-    url  <- paste("https://stellarapi.io/gethash/",res['transactionid'])
-    url  <- gsub(" ", "", url, fixed = TRUE)
+    if (res['code'] == 200) {
+
+      url  <- paste("https://horizon.stellar.org/transactions/",res['transactionid'])
+      url  <- gsub(" ", "", url, fixed = TRUE)
+    }
+    else {
+      stop("Something went wrong. Errormessage: ",res['message'])
+    }
 
     return(url)
   }
-
 }
 
 
-#' Create hash of an object/dataset
+#' Create sha256 hash of an object/dataset
 #'
 #' @param data any dataset or object
 #'
@@ -149,7 +160,7 @@ create_hashObject <- function(data) {
 }
 
 
-#' Create hash of a file
+#' Create sha256 hash of a file
 #'
 #' @param path filename (and path, if outside working directory) of a file
 #'
@@ -187,10 +198,12 @@ create_hashFile <- function(path) {
 #'
 #' @examples
 #' \donttest{
-#' get_hash("https://stellarapi.io/gethash/ea0ae0")
+#' get_hash("https://horizon.stellar.org/transactions/ea0ae0etc")
 #' }
 get_hash <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 
+  #get information direct from horizon.stellar.org
+  url  <- gsub("https://stellarapi.io/gethash/", "https://horizon.stellar.org/transactions/", url, fixed = TRUE)
 
   if (!is.null(proxy_ip)) {
     req <- GET(url, use_proxy(proxy_ip, proxy_port),verbose(data_out = FALSE, data_in = FALSE, info = FALSE, ssl = FALSE))
@@ -202,11 +215,17 @@ get_hash <- function(url, proxy_ip=NULL, proxy_port=NULL) {
   json <- content(req, "text")
 
   if (validate(json)==FALSE) {
-    stop("stellarapi.io returned an unknown error")
+    stop("horizon.stellar.org returned an unknown error")
   }
 
   res  <- fromJSON(json)
-  hex  <- unlist(res['memo-hexformat'], recursive = FALSE, use.names = FALSE)
+  dec  <- unlist(res['memo'], recursive = FALSE, use.names = FALSE)
+
+  if (length(dec) < 1) { stop("The resource at the url requested was not found.") }
+
+  hex <- base64_dec(dec)
+  hex <- paste( unlist(hex), collapse='')
+
   return(hex)
 
 }
@@ -223,9 +242,12 @@ get_hash <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 #'
 #' @examples
 #' \donttest{
-#' get_timestamp("https://stellarapi.io/gethash/ea0ae0")
+#' get_timestamp("https://horizon.stellar.org/transactions/ea0ae0etc")
 #' }
 get_timestamp <- function(url, proxy_ip=NULL, proxy_port=NULL) {
+
+  #get information direct from horizon.stellar.org
+  url  <- gsub("https://stellarapi.io/gethash/", "https://horizon.stellar.org/transactions/", url, fixed = TRUE)
 
   if (!is.null(proxy_ip)) {
     req <- GET(url, use_proxy(proxy_ip, proxy_port),verbose(data_out = FALSE, data_in = FALSE, info = FALSE, ssl = FALSE))
@@ -237,46 +259,40 @@ get_timestamp <- function(url, proxy_ip=NULL, proxy_port=NULL) {
   json <- content(req, "text")
 
   if (validate(json)==FALSE) {
-    stop("stellarapi.io returned an unknown error")
+    stop("horizon.stellar.org returned an unknown error")
   }
 
   res  <- fromJSON(json)
-  GMT  <- unlist(res['GMT-timestamp'], recursive = FALSE, use.names = FALSE)
+
+  GMT  <- unlist(res['created_at'], recursive = FALSE, use.names = FALSE)
+
+  if (is.null(GMT)) {
+    stop("The resource at the url requested was not found.")
+  }
+
   return(GMT)
 
 }
 
 
-#' Retrieve url of the transaction on STELLAR network
+#' Get url of the transaction on STELLAR network (stellarchain.io (non-json))
 #'
 #' @param url url
-#' @param proxy_ip if needed, provide proxy ip
-#' @param proxy_port if needed, provide proxy port
 #'
 #' @return url url of blockchain transaction
 #' @export
 #'
 #' @examples
 #' \donttest{
-#' get_url_blockchaintransaction("https://stellarapi.io/gethash/ea0ae0")
+#' get_url_blockchaintransaction("https://horizon.stellar.org/transactions/ea0ae0etc")
 #' }
-get_url_blockchaintransaction <- function(url, proxy_ip=NULL, proxy_port=NULL) {
+get_url_blockchaintransaction <- function(url) {
 
-  if (!is.null(proxy_ip)) {
-    req <- GET(url, use_proxy(proxy_ip, proxy_port),verbose(data_out = FALSE, data_in = FALSE, info = FALSE, ssl = FALSE))
-  }
-  else {
-    req <- GET(url)
-  }
+  #get information direct from horizon.stellar.org
+  url  <- gsub("https://stellarapi.io/gethash/", "https://horizon.stellar.org/transactions/", url, fixed = TRUE)
 
-  json <- content(req, "text")
+  url  <- gsub("https://horizon.stellar.org/transactions/", "https://stellarchain.io/tx/", url, fixed = TRUE)
 
-  if (validate(json)==FALSE) {
-    stop("stellarapi.io returned an unknown error")
-  }
-
-  res  <- fromJSON(json)
-  url  <-  unlist(res['stellar-link'], recursive = FALSE, use.names = FALSE)
   return(url)
 
 }
@@ -295,9 +311,12 @@ get_url_blockchaintransaction <- function(url, proxy_ip=NULL, proxy_port=NULL) {
 #'
 #' @examples
 #' \donttest{
-#' validate_hashObject("https://stellarapi.io/gethash/ea0ae0", data)
+#' validate_hashObject("https://horizon.stellar.org/transactions/ea0ae0etc", data)
 #' }
 validate_hashObject <- function(url, data, proxy_ip=NULL, proxy_port=NULL) {
+
+  #get information direct from horizon.stellar.org
+  url  <- gsub("https://stellarapi.io/gethash/", "https://horizon.stellar.org/transactions/", url, fixed = TRUE)
 
   if (!exists(deparse(substitute(data)))) {
     stop("object '",deparse(substitute(data)),"' does not exist")
@@ -313,12 +332,19 @@ validate_hashObject <- function(url, data, proxy_ip=NULL, proxy_port=NULL) {
   json         <- content(req, "text")
 
   if (validate(json)==FALSE) {
-    stop("stellarapi.io returned an unknown error")
+    stop("horizon.stellar.org returned an unknown error")
   }
 
-  res          <- fromJSON(json)
+  res  <- fromJSON(json)
+
+  dec  <- unlist(res['memo'], recursive = FALSE, use.names = FALSE)
+
+  if (length(dec) < 1) { stop("The resource at the url requested was not found.") }
+
+  hex  <- base64_dec(dec)
+  hash <- paste( unlist(hex), collapse='')
+
   hashonthefly <- digest(data, algo=c("sha256"))
-  hash         <- res['memo-hexformat']
 
   if(hashonthefly == hash){
     res <- "correct"
@@ -345,9 +371,12 @@ validate_hashObject <- function(url, data, proxy_ip=NULL, proxy_port=NULL) {
 #'
 #' @examples
 #' \donttest{
-#' validate_hashFile("https://stellarapi.io/gethash/ea0ae0", "test.rds")
+#' validate_hashFile("https://horizon.stellar.org/transactions/ea0ae0etc", "test.rds")
 #' }
 validate_hashFile <- function(url, path, proxy_ip=NULL, proxy_port=NULL) {
+
+  #get information direct from horizon.stellar.org
+  url  <- gsub("https://stellarapi.io/gethash/", "https://horizon.stellar.org/transactions/", url, fixed = TRUE)
 
   if (!is.character(path)) stop("Please specify a correct path.")
 
@@ -366,12 +395,19 @@ validate_hashFile <- function(url, path, proxy_ip=NULL, proxy_port=NULL) {
     json         <- content(req, "text")
 
     if (validate(json)==FALSE) {
-      stop("stellarapi.io returned an unknown error")
+      stop("horizon.stellar.org returned an unknown error")
     }
 
-    res          <- fromJSON(json)
+    res  <- fromJSON(json)
+
+    dec  <- unlist(res['memo'], recursive = FALSE, use.names = FALSE)
+
+    if (length(dec) < 1) { stop("The resource at the url requested was not found.") }
+
+    hex  <- base64_dec(dec)
+    hash <- paste( unlist(hex), collapse='')
+
     hashonthefly <- digest(path, algo="sha256", file=TRUE)
-    hash         <- res['memo-hexformat']
 
     if(hashonthefly == hash){
       res <- "correct"
