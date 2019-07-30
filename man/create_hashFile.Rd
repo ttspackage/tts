@@ -2,7 +2,7 @@
 % Please edit documentation in R/tts.r
 \name{create_hashFile}
 \alias{create_hashFile}
-\title{Create hash of a file}
+\title{Create sha256 hash of a file}
 \usage{
 create_hashFile(path)
 }
@@ -13,7 +13,7 @@ create_hashFile(path)
 hash
 }
 \description{
-Create hash of a file
+Create sha256 hash of a file
 }
 \examples{
 \donttest{

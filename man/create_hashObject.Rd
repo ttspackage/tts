@@ -2,7 +2,7 @@
 % Please edit documentation in R/tts.r
 \name{create_hashObject}
 \alias{create_hashObject}
-\title{Create hash of an object/dataset}
+\title{Create sha256 hash of an object/dataset}
 \usage{
 create_hashObject(data)
 }
@@ -13,7 +13,7 @@ create_hashObject(data)
 hash
 }
 \description{
-Create hash of an object/dataset
+Create sha256 hash of an object/dataset
 }
 \examples{
 \donttest{

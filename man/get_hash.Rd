@@ -21,6 +21,6 @@ Retrieve hash from STELLAR network
 }
 \examples{
 \donttest{
-get_hash("https://stellarapi.io/gethash/ea0ae0")
+get_hash("https://horizon.stellar.org/transactions/ea0ae0etc")
 }
 }

@@ -2,25 +2,21 @@
 % Please edit documentation in R/tts.r
 \name{get_url_blockchaintransaction}
 \alias{get_url_blockchaintransaction}
-\title{Retrieve url of the transaction on STELLAR network}
+\title{Get url of the transaction on STELLAR network (stellarchain.io (non-json))}
 \usage{
-get_url_blockchaintransaction(url, proxy_ip = NULL, proxy_port = NULL)
+get_url_blockchaintransaction(url)
 }
 \arguments{
 \item{url}{url}
-
-\item{proxy_ip}{if needed, provide proxy ip}
-
-\item{proxy_port}{if needed, provide proxy port}
 }
 \value{
 url url of blockchain transaction
 }
 \description{
-Retrieve url of the transaction on STELLAR network
+Get url of the transaction on STELLAR network (stellarchain.io (non-json))
 }
 \examples{
 \donttest{
-get_url_blockchaintransaction("https://stellarapi.io/gethash/ea0ae0")
+get_url_blockchaintransaction("https://horizon.stellar.org/transactions/ea0ae0etc")
 }
 }

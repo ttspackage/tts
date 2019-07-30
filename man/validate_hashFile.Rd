@@ -25,6 +25,6 @@ p.s. stellar transactions take between 5-7 seconds. If you validate to soon afte
 }
 \examples{
 \donttest{
-validate_hashFile("https://stellarapi.io/gethash/ea0ae0", "test.rds")
+validate_hashFile("https://horizon.stellar.org/transactions/ea0ae0etc", "test.rds")
 }
 }

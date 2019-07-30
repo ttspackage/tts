@@ -21,6 +21,6 @@ Retrieve timestamp from STELLAR network
 }
 \examples{
 \donttest{
-get_timestamp("https://stellarapi.io/gethash/ea0ae0")
+get_timestamp("https://horizon.stellar.org/transactions/ea0ae0etc")
 }
 }
