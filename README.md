@@ -52,7 +52,7 @@ validate_hashFile(url, "E:/data.rds")
 ```
 
 ## 'Helper functions'
-The package includes some helper functions: 
+The package includes some helper functions. These functions are meant for manual checks:
 
 ```
 get_timestamp(url)
@@ -62,7 +62,18 @@ get_hash(url)
 [1] "219d329dabecb5517d0e3b34aa36ad57dfb8055f54afc16bc8ca32bd244b67f0"
 ```
 
-The package makes use of a free service, provided by https://stellarapi.io. This service makes it possible to make transactions and get information of previous transactions. In case you want to get the transaction on the Stellar network, you can use:
+In case you want to create a hash 'on the fly', you can use:
+
+```
+create_hashFile("E:/data.rds")
+[1] "744e41f7d7e1f05bd29229a944ee598b94d593aec4c012e50bdeb63a1cd0b6b7"
+
+create_hashObject(x)
+[1] "219d329dabecb5517d0e3b34aa36ad57dfb8055f54afc16bc8ca32bd244b67f0"
+```
+
+
+In case you want to get the transaction on the Stellar network in html form, you can use:
 
 ```
 get_url_blockchaintransaction(url)
@@ -87,12 +98,14 @@ convert_stellarHash("IZ0ynavstVF9Djs0qjatV9+4BV9Ur8FryMoyvSRLZ/A=")
 ```
 
 ## About stellarapi.io
-Stellarapi.io provides a free service and is a non-commercial research project. Use this service at your own risk. Availability is not guaranteed. The purpose of stellarapi.io is to provide an easy to use interface to Stellar's network. The original blockchain transaction can allways be viewed by substituting stellapi/gethash with stellarchain or horizon.stellar.org:
+Stellarapi.io provides a free service and is a non-commercial research project. Use this service at your own risk. Availability is not guaranteed. This package uses stellarapi.io for **creating** transactions on the stellar network. In the unchangeable blockchain of the stellar network, the hash is permanently stored. **Validation** is done directly on the stellar network (horizon). Because of this, validation can be done even when stellarapi.io is no longer available.   
+
+The original blockchain transaction can allways be viewed by substituting stellapi/gethash with stellarchain or horizon.stellar.org:
 
 ```
-https://stellarapi.io/gethash/076a3c8879d6cbb84f4f2906a41464eb60ce515f17183418fddfa502cfd5dceb
+https://stellarapi.io/gethash/3b893986a3fae23797fb44f5ef526198292522788bc36dda75186dff170d563a
 
-https://stellarchain.io/tx/076a3c8879d6cbb84f4f2906a41464eb60ce515f17183418fddfa502cfd5dceb
-https://horizon.stellar.org/transactions/076a3c8879d6cbb84f4f2906a41464eb60ce515f17183418fddfa502cfd5dceb
+https://stellarchain.io/tx/3b893986a3fae23797fb44f5ef526198292522788bc36dda75186dff170d563a (html)
+https://horizon.stellar.org/transactions/3b893986a3fae23797fb44f5ef526198292522788bc36dda75186dff170d563a (json)
 ```
 As stated above, you can convert the base64encoded hash to regular hexadecimal form with convert_stellarHash("bases64encodedhash").
