@@ -82,8 +82,8 @@ The provided url shows all information of the transaction on the Stellar network
 Use the following code to convert the base64encoded hash to regular hexadecimal form:
 
 ```
-convert_stellarHash("dE5B99fh8FvSkimpRO5Zi5TVk67EwBLlC962OhzQtrc=")
-[1] "744e41f7d7e1f05bd29229a944ee598b94d593aec4c012e50bdeb63a1cd0b6b7"
+convert_stellarHash("IZ0ynavstVF9Djs0qjatV9+4BV9Ur8FryMoyvSRLZ/A=")
+[1] "219d329dabecb5517d0e3b34aa36ad57dfb8055f54afc16bc8ca32bd244b67f0"
 ```
 
 ## About stellarapi.io
