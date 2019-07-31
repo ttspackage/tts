@@ -18,12 +18,13 @@ x <- 1
 
 url <- create_ttsObject(x)
 
-# store url to blockchain transaction in your code (or somewhere else)
+# store url of blockchain transaction in your code (or somewhere else)
+# this url can later be used for validation
 url
 [1] "https://horizon.stellar.org/transactions/3b893986a3fae23797fb44f5ef526198292522788bc36dda75186dff170d563a"
 
 # Compare the hash on the Stellar network with the hash generated 'on the fly' 
-# (p.s. wait 6 seconds after creation of tts (time needed for confirming all transaction on ledger))
+# p.s. wait 6 seconds after creation of tts (time needed for confirmation)
 
 validate_hashObject(url, x)
 [1] "correct"
