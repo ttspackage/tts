@@ -18,9 +18,9 @@ x <- 1
 
 url <- create_ttsObject(x)
 
-# store url in your code (or somewhere else)
+# store url to blockchain transaction in your code (or somewhere else)
 url
-[1] "https://stellarapi.io/gethash/076a3c8879d6cbb84f4f2906a41464eb60ce515f17183418fddfa502cfd5dceb"
+[1] "https://horizon.stellar.org/transactions/3b893986a3fae23797fb44f5ef526198292522788bc36dda75186dff170d563a"
 
 # Compare the hash on the Stellar network with the hash generated 'on the fly' 
 # (p.s. wait 6 seconds after creation of tts (time needed for confirming all transaction on ledger))
