@@ -73,7 +73,7 @@ The provided url shows all information of the transaction on the Stellar network
 
 <br/>
 
-<img src="stellar_transaction.gif" align="left" />
+<img src="stellar_transaction2.gif" align="left" />
 
 
 
