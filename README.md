@@ -98,8 +98,8 @@ convert_stellarHash("IZ0ynavstVF9Djs0qjatV9+4BV9Ur8FryMoyvSRLZ/A=")
 [1] "219d329dabecb5517d0e3b34aa36ad57dfb8055f54afc16bc8ca32bd244b67f0"
 ```
 
-## About stellarapi.io
-Stellarapi.io provides a free service and is a non-commercial research project. Use this service at your own risk. Availability is not guaranteed. This package uses stellarapi.io for **creating** transactions on the stellar network. In the unchangeable blockchain of the stellar network, the hash is permanently stored. **Validation** is done directly on the stellar network (horizon). Because of this, validation can be done even when stellarapi.io is no longer available.   
+## About stellarapi.io and stellar.org
+Stellarapi.io provides a free service and is a non-commercial research project. Use this service at your own risk. Availability is not guaranteed. Stellarapi.io is not maintained by or officially endorsed by the Stellar Foundation. This package uses stellarapi.io for **creating** transactions on the stellar network. In the unchangeable blockchain of the stellar network, the hash is permanently stored. **Validation** is done directly on the stellar network (horizon). Because of this, validation can be done even when stellarapi.io is no longer available.   
 
 The original blockchain transaction can allways be viewed by substituting stellapi/gethash with stellarchain or horizon.stellar.org:
 
